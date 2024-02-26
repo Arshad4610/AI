@@ -1,0 +1,31 @@
+g={'1':['2','3'],
+  '2':['4','5'],
+  '3':['6','7'],
+  '4':[],
+  '5':[],
+  '6':[],
+  '7':[]}
+def dls(g,st,goal,limit):
+    explored=[]
+    frontier=[]
+    explored.append(st)
+    frontier.append(st)
+    while len(frontier)<limit:
+        m=frontier.pop()
+        if goal in explored:
+            break
+        for i in g[m]:
+            if i not in explored:
+                if goal not in explored:
+                    explored.append(i)
+                    frontier.append(i)
+    if goal in explored:
+        print("Goal is found")
+    else:
+        print("Goal is not found")
+dls(g,'1','5',2)
+---------------------------------------------------------------------------------------
+Output:
+  Goal is not found
+        
+                    
