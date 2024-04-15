@@ -1,0 +1,29 @@
+import math
+def minimax(curdep,nodeindex,maxturn,scores,targetdep):
+    if curdep==targetdep:
+        return scores[nodeindex]
+    if maxturn:
+        return max(minimax(curdep+1,nodeindex*2,False,scores,targetdep),minimax(curdep+1,nodeindex*2+1,False,scores,targetdep))
+    else:
+        return min(minimax(curdep+1,nodeindex*2,True,scores,targetdep),minimax(curdep+1,nodeindex*2+1,True,scores,targetdep))
+num_nodes=int(input("Enter no.of nodes:"))
+scores=[]
+print("Enter scores of each node:")
+for i in range(num_nodes):
+    score=int(input(f'node {i}:'))
+    scores.append(score)
+treedep=int(math.log2(len(scores)))
+print("Optimal:",minimax(0,0,True,scores,treedep))
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+OUTPUT:
+Enter no.of nodes:8
+Enter scores of each node:
+node 0:3
+node 1:5
+node 2:6
+node 3:9
+node 4:1
+node 5:2
+node 6:0
+node 7:-1
+Optimal: 5
