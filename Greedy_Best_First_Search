@@ -1,0 +1,50 @@
+graph={'0':['1','2','3'],
+       '1':['4','5'],
+       '2':['6'],
+       '3':['7','8'],
+       '4':[],'5':[],'6':[],'8':[],'7':['9']}
+h={'0':20,'1':22,'2':21,'3':10,'4':25,'5':24,'6':30,'7':5,'8':12,'9':0}
+def neighbors(graph,node):
+    l=[]
+    for i in graph[node]:
+        l.append(i[0])
+    return l
+def GFS(initial,goal,graph,h):
+    frontier,path,next_vertices=[],[],[]
+    frontier.append(initial)
+    explored=set()
+    j=1
+    while frontier:
+        node=frontier.pop()
+        path.append(node)
+        if node==goal:
+            print("Goal found")
+            return path
+        else:
+            next_vertices=neighbors(graph,node)
+            v=next_vertices[0]
+            for i in range(1,len(next_vertices)):
+                if h[next_vertices[i]]<=h[v]:
+                    v=next_vertices[i]
+            if v not in explored:
+                frontier.append(v)
+                explored.add(v)
+        print(f'at step{j}:')
+        print("Frontier:",frontier)
+        print("Explored:",explored)
+        j+=1
+    return "Goal not found"
+print(GFS('0','9',graph,h))
+------------------------------------------------------------------------------------------------------------------------------------
+OUTPUT:
+at step1:
+Frontier: ['3']
+Explored: {'3'}
+at step2:
+Frontier: ['7']
+Explored: {'7', '3'}
+at step3:
+Frontier: ['9']
+Explored: {'7', '3', '9'}
+Goal found
+['0', '3', '7', '9']
