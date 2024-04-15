@@ -1,0 +1,42 @@
+MAX,MIN=1000,-1000
+def minimax(dep,nodeindex,maximizingplayer,scores,alpha,beta):
+    if dep==0 or nodeindex>=len(scores):
+        return scores[nodeindex]
+    if maximizingplayer:
+        best=MIN
+        for i in range(0,2):
+            val=minimax(dep-1,nodeindex*2+i,False,scores,alpha,beta)
+            best=max(best,val)
+            alpha=max(alpha,best)
+            if beta<=alpha:
+                break
+        return best
+    else:
+        best=MAX
+        for i in range(0,2):
+            val=minimax(dep-1,nodeindex*2+i,True,scores,alpha,beta)
+            best=min(best,val)
+            beta=min(beta,best)
+            if beta<=alpha:
+                break
+        return best
+scores=[]
+num_nodes=int(input("Enter no.of nodes"))
+print("Enter score of each node")
+for i in range(num_nodes):
+    score=int(input(f'node {i}:'))
+    scores.append(score)
+print('OPtimal:',minimax(3,0,True,scores,MIN,MAX))
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+OUTPUT:
+Enter no.of nodes8
+Enter score of each node
+node 0:-1
+node 1:4
+node 2:2
+node 3:6
+node 4:-3
+node 5:-5
+node 6:0
+node 7:7
+OPtimal: 4
