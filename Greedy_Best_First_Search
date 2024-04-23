@@ -62,6 +62,8 @@ while fr:
     path.append(k)
     min=999
     node=""
+    print('Fr:',fr)
+    print('Exp:',exp)
     if k==goal:
         print('found')
         print(path)
@@ -76,5 +78,13 @@ while fr:
 OUTPUT:
 A
 E
+Fr: []
+Exp: []
+Fr: []
+Exp: ['A']
+Fr: []
+Exp: ['A', 'D']
+Fr: []
+Exp: ['A', 'D', 'F']
 found
 ['A', 'D', 'F', 'E']
