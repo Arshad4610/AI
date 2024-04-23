@@ -1,0 +1,47 @@
+def dls(graph,st,goal,depth):
+    #print('A')
+    fr,exp,path=[],[],[]
+    fr.append(st)
+    exp.append(st)
+    lvl=flag=0
+    while fr and lvl<=depth:
+        node=fr.pop()
+        path.append(node)
+        if node==goal:
+            print(path)
+            flag=1
+            return flag
+        for i in graph[node]:
+            if i not in exp:
+                exp.append(i)
+                fr.append(i)
+        print('f,e',fr,exp)
+        lvl+=1
+        if len(fr)==0 or lvl>depth:
+            return flag
+def idfs(graph,st,goal):
+    res=[]
+    for i in range(5):
+        res.append(dls(graph,st,goal,i))
+    #print(res)
+    if res[-1]==1:
+        print("found")
+    else:
+        print('not found')
+graph={0:[1,2],1:[3],2:[3,4],3:[4]}
+idfs(graph,0,4)
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+OUTPUT:
+f,e [1, 2] [0, 1, 2]
+f,e [1, 2] [0, 1, 2]
+f,e [1, 3, 4] [0, 1, 2, 3, 4]
+f,e [1, 2] [0, 1, 2]
+f,e [1, 3, 4] [0, 1, 2, 3, 4]
+[0, 2, 4]
+f,e [1, 2] [0, 1, 2]
+f,e [1, 3, 4] [0, 1, 2, 3, 4]
+[0, 2, 4]
+f,e [1, 2] [0, 1, 2]
+f,e [1, 3, 4] [0, 1, 2, 3, 4]
+[0, 2, 4]
+found
