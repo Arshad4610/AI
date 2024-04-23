@@ -1,0 +1,28 @@
+import heapq
+def ucs(graph,start,goal):
+    frontier=[(0,start)]
+    explored=set()
+    path=[]
+    while frontier:
+        #print(frontier)
+        pc,node=heapq.heappop(frontier)
+        path.append(node)
+        if node not in explored:
+            explored.add(node)
+        if node==goal:
+            print("found")
+            return path,pc
+        for key,val in graph[node].items():
+            if key not in explored:
+                explored.add(key)
+                heapq.heappush(frontier,(pc+val,key))
+        print(frontier,explored)
+    return ('not found')
+graph={1:{2:12,3:8},2:{4:2,5:4},3:{6:3,7:9}}
+print(ucs(graph,1,6))                
+------------------------------------------------------------------------------------------------------------------------------
+OUTPUT:
+FRONTIER:[(8, 3), (12, 2)] EXPLORED:{1, 2, 3}
+FRONTIER:[(11, 6), (12, 2), (17, 7)] EXPLORED:{1, 2, 3, 6, 7}
+found
+([1, 3, 6], 11)
