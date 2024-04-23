@@ -1,0 +1,39 @@
+graph={'A':{'D':10,'B':5},'B':{'C':4,'F':15},'C':{'E':8},'D':{'F':11},'F':{'E':4}} 
+h={'A':20,'B':15,'C':24,'D':12,'E':24,'F':0}
+st=input()
+goal=input()
+fr=[]
+exp=[]
+path=[]
+fr.append(st)
+while fr:
+    k=fr.pop(0)
+    path.append(k)
+    min=999
+    node=""
+    print(fr)
+    print(exp)
+    if k==goal:
+        print('found')
+        print(path)
+        break
+    exp.append(k)
+    for i in graph[k]:
+        if min>graph[k][i]+h[i]:
+            min=graph[k][i]+h[i]
+            node=i
+    fr.append(node)
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+OUTPUT:
+A
+E
+Fr: []
+Exp: []
+Fr: []
+Exp: ['A']
+Fr: []
+Exp: ['A', 'B']
+Fr: []
+Exp: ['A', 'B', 'F']
+found
+['A', 'B', 'F', 'E']
